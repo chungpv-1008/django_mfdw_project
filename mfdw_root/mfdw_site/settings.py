@@ -60,7 +60,6 @@ DATABASES = {
     'default': {
         'ENGINE': env("DATABASE_ENGINE"),
         'HOST': env("DATABASE_HOST"),
-        'PORT': env("DATABASE_PORT"),
         'NAME': env("DATABASE_NAME"),
         'USER': env("DATABASE_USER"),
         'PASSWORD': env("DATABASE_PASSWORD"),
