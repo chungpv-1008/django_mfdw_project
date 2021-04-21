@@ -7,7 +7,7 @@
     <meta charset="utf-8">
     <title>
         {% block title %}
-            Untitled Document
+        Untitled Document
         {% endblock title %}
     </title>
     <link href="{% static 'main.css' %}" rel="stylesheet" type="text/css">
@@ -18,6 +18,13 @@
         <header id="header">
             <div id="logo">
                 <img src="{% static 'logo.jpg' %}" alt="" />
+                <span style="float: right;">
+                    {% if user.is_authenticated %}
+                    Hello, {{ user.username }}. <a href="{% url 'logout' %}?next=/">Logout</a>
+                    {% else %}
+                    Not logged in. <a href="{% url 'login' %}?next=/">Login</a>
+                    {% endif %}
+                </span>
             </div>
             <div id="topbanner">
                 <img src="{% static 'top_banner.png' %}" width="800" height="200" alt="" />
@@ -27,27 +34,28 @@
             <nav id="nav">
                 <ul>
                     {% block sidenav %}
-                        <li>Menu 1</li>
-                        <li>Menu 2</li>
-                        <li>Menu 3</li>
+                    <li>Menu 1</li>
+                    <li>Menu 2</li>
+                    <li>Menu 3</li>
                     {% endblock sidenav %}
                     <li><a href="/contact">Contact Us</a></li>
                     <li><a href="/quote">Get a Quote</a></li>
+                    <li><a href="/quote/show">Show quotes</a></li>
                 </ul>
             </nav>
         </aside>
         <section id="main">
             {% block content %}
-                <h1>Welcome!</h1>
-                <p>This is the site template</p>
+            <h1>Welcome!</h1>
+            <p>This is the site template</p>
             {% endblock content %}
             {% for x in y %}
-                <p>
-                    {{ x.1 }}
-                </p>
+            <p>
+                {{ x.1 }}
+            </p>
             {% endfor %}
             {% filter force_escape|lower %}
-                This text will be HTML-escaped, and will appear in all lowercase.
+            This text will be HTML-escaped, and will appear in all lowercase.
             {% endfilter %}
         </section>
         <footer id="footer">Copyright &copy; 2021 Meandco Web Design</footer>
